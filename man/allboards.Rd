@@ -16,7 +16,7 @@
 }
 \usage{
 no.of.boards(x, n = 1e5)
-allboards(x, n = 1e5)
+allboards(x, n = 1e5, func=NULL)
 allprobs(x, n = 1e5, normalize=TRUE, give.log=FALSE, use.C=TRUE)
 is.1dof(x)
 maxlike(x)
@@ -29,6 +29,9 @@ maxlike(x)
   \item{use.C}{In function \code{allprobs()}, Boolean with default
     \code{TRUE} meaning to use the \code{C} routine, and \code{FALSE}
     meaning to use an \code{R} routine}
+  \item{func}{In function \code{allboards()}, argument to specify the
+    function returned; default \code{NULL} means to return the whole
+    board}
   \item{normalize}{In function \code{allprobs()}, Boolean with default
     \code{TRUE} meaning to normalize the returned values so they sum to
     one (and thus correspond to probabilities \emph{conditional} on the
@@ -54,15 +57,22 @@ maxlike(x)
   of \code{gear}).
 
   Function \code{maxlike(x)} returns the entry of \code{allboards()}
-  that has the highest probabliity of occurring.  Compare \code{best}.
+  that has the highest probability of occurring.  Compare \code{best()}.
 
   In functions \code{no.of.boards()} and \code{allboards()}, argument
   \code{n} is the maximum number of boards (or maximum count) returned,
   except for special value \code{0}, which means to return (or count)
-  all possible boards.  \strong{Warning: } many frequently-encountered
-  boards have a very large number of possible configurations, and if
-  called with \code{n=0}, these functions will iterate for a
-  \strong{very} long time before stopping.
+  all possible boards.
+
+  (Actually, if there are more than \code{n} permissible boards, the
+  first \code{n+1} boards are returned by \code{allboards()}, and
+  \code{n+1} is returned by \code{no.of.boards()}.  This is because the
+  \code{C} code checks for the last board having a successor).
+
+  \strong{Warning} Many frequently-encountered boards have a very large
+  number of possible configurations, and if called with \code{n=0},
+  these functions will iterate for a \strong{very} long time before
+  stopping.
 
 }
 \author{Robin K. S. Hankin (\R); Luke G. West (C++)}
@@ -77,6 +87,10 @@ data(frogs)
 x <- matrix(c(28,2,9,7,3,1,14,34,9,8,6,2),ncol=2)
 \dontrun{no.of.boards(x)} # Should be 339314 according to Gail and Mantel
 
+
+data(iqd)
+f <- function(x){x[1,1]}
+table(allboards(iqd,1000,f))
 
 }
 \keyword{ array }

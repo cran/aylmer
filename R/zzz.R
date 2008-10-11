@@ -1,6 +1,8 @@
 "no.of.boards" <- function(x,n=1e5){
   stopifnot(is.matrix(x))
-  n <- n+1
+  if(n>0){
+    n <- n+1
+  }
   jj <- c(name="numboards", .Cargs(x), ans=as.integer(n), PACKAGE="aylmer")
   out <- do.call(".C",jj)$ans
   if(out == n){
@@ -9,7 +11,10 @@
 return(out)
 }  
 
-"allboards" <- function(x, n=1e5){
+"allboards" <- function(x, n=1e5, func=NULL){
+  if(!is.null(func)){
+    return(apply(Recall(x,n=n),3,func))
+  }
   stopifnot(is.matrix(x))
   n <-  no.of.boards(x,n=n)
 

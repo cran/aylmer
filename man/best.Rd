@@ -24,13 +24,15 @@ best(x, func = NULL, n = 100, ...)
   }
 \author{Robin K. S. Hankin}
 \note{
-  Function \code{randomprobs()} also takes a \code{func} argument and (if
-  argument \code{give.best} is \code{TRUE}) will return the optimal
-  board.  But these two functions are very different: \code{best()} uses
-  \code{optim()} which incorporates highly specific optimization
-  algorithms to find a global maximum, while \code{randomprobs()}
-  creates a Markov chain and reports the board with the most desirable
-  objective function. 
+  
+  Function \code{randomprobs()} also takes a \code{func} argument and
+  can be used to find an optimal board, by generating random permissible
+  boards and finding the best one.  But these two functions are very
+  different: \code{best()} uses \code{optim()} which incorporates highly
+  specific optimization algorithms to find a global maximum, while
+  \code{randomprobs()} creates a Markov chain and reports the board with
+  the most desirable objective function.
+  
 }
 \seealso{\code{\link{optim}},\code{\link{prob}}}
 \examples{

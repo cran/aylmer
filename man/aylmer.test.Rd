@@ -114,7 +114,6 @@ boards all have a probability much much smaller than that of the data.
 data(iqd)
 
 aylmer.test(iqd)
-aylmer.test(iqd)
 
 \dontrun{aylmer.test(iqd,simulate.p.value=TRUE)}
 

@@ -55,13 +55,18 @@ probabilities of the boards encountered
   A board that requires more than 100 attempts is probably well-suited
   to the exact test as permissible boards will likely be enumerable
   using \code{allboards()}.
+
+  To find the permissible board that maximizes some objective function,
+  use \code{best()}, which applies the bespoke optimization routines of
+  \code{optim()}
+  
 }  
-\seealso{\code{\link{aylmer.test}}}
+\seealso{\code{\link{aylmer.test}},\code{\link{best}}}
 \examples{
 data(chess)
 aylmer.test(chess)
 
-a <- matrix(1,9,9)
+a <- matrix(1,9,9)    # See Sloane's A110058
 plot(randomprobs(a,1000),type="b",main="Importance of burn-in")
 
 set.seed(0)
