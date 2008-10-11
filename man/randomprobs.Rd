@@ -1,5 +1,6 @@
 \name{randomprobs}
 \alias{randomprobs}
+\alias{randomboards}
 \alias{candidate}
 \title{Probabilities of random boards}
 \description{
@@ -8,6 +9,7 @@ Metropolis-Hastings algorithm
 }
 \usage{
 randomprobs(x, B=2000, n=100, burnin = 0,  use.brob=FALSE, func=NULL)
+randomboards(x, B=2000, n=100, burnin=0)
 candidate(x, n = 100, give = FALSE)
 }
 \arguments{
@@ -28,8 +30,13 @@ candidate(x, n = 100, give = FALSE)
     section below}
 }
 \value{
-Returns a vector of length \code{B} with entries corresponding to the
-probabilities of the boards encountered
+
+  Function \code{randomprobs()} returns a vector of length \code{B} with
+  entries corresponding to the probabilities of the boards encountered.
+
+  Function \code{randomboards()} returns an array with slices being
+  successive boards
+  
 }
 \references{
   \itemize{
@@ -73,6 +80,9 @@ set.seed(0)
 b <- diag(rep(6,6))
 plot(randomprobs(b,B=1000,n=1000), type="b",main="Importance of burn-in, part II")
 
+
+data(purum)
+randomboards(purum,10)
 
 }
 

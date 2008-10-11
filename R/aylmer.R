@@ -187,8 +187,7 @@ setValidity("board",
   return(out)
 }
   
-randomprobs <-
-function(x, B=2000, n=100, burnin=0,  use.brob=FALSE, func=NULL){
+"randomprobs" <- function(x, B=2000, n=100, burnin=0, use.brob=FALSE, func=NULL){
   x <- as.board(x)@x
   out <- rep(0,B)
   if(use.brob){
@@ -197,7 +196,7 @@ function(x, B=2000, n=100, burnin=0,  use.brob=FALSE, func=NULL){
 
   default <- FALSE
   if(is.null(func)){
-    func <- function(x){prob(x,give.log=TRUE, use.brob=use.brob)}
+    func <- function(x){prob(x, give.log=TRUE, use.brob=use.brob)}
     default <- TRUE
   }
   
@@ -221,7 +220,7 @@ function(x, B=2000, n=100, burnin=0,  use.brob=FALSE, func=NULL){
       stop("this cannot happen.")
     } 
     alpha <- min(as.numeric(exp(num-den)),1)  #num, den are logs
-    if (runif(1) < alpha) {
+    if (runif(1) < alpha){
       if(default){
         out[i] <- num
       } else {
@@ -239,6 +238,37 @@ function(x, B=2000, n=100, burnin=0,  use.brob=FALSE, func=NULL){
   if(burnin>0){
     out <- out[-seq_len(burnin)]
   }
+  return(out)
+}
+
+"randomboards" <- function(x, B=2000, n=100, burnin=0){
+  x <- as.board(x)@x
+  out <- array(0L,c(nrow(x),ncol(x),B+burnin))
+
+  old <- x
+  out[,,1] <- x
+  
+  for(i in seq_len(B+burnin)[-1]){
+    proposed <- candidate(old, n=n)
+    num <- prob(proposed, give.log=TRUE)
+    den <- prob(old     , give.log=TRUE)
+    
+    if ((num == -Inf) & (den == -Inf)) {  #zero probability
+      stop("this cannot happen.")
+    } 
+    alpha <- min(as.numeric(exp(num-den)),1)  #num, den are logs
+    if (runif(1) < alpha){
+      out[,,i] <- proposed
+      old <- proposed
+    } else {
+      out[,,i] <- old
+    }
+  }
+  
+  if(burnin>0){
+    out <- out[,,-seq_len(burnin)]
+  }
+  dimnames(out) <- dimnames(x)
   return(out)
 }
 
