@@ -11,21 +11,20 @@
 }
 \usage{data(icons)}
 \details{
-
   The six icons were used in this study were:
-  \description{
-    \item[PB] polar bears, which face extinction through loss of ice
-    floe hunting grounds
-    \item[NB] the Norfolk Broads, which flood due to intense rainfall
-    events
-    \item[LF] London flooding, as a result of sea level rise
-    \item[THC] the Thermo-haline circulation, which may slow or stop as
-  a result of anthropogenic modification of the hydrological cycle
-  \item[OA] oceanic acidification as a result of anthropogenic emissions
-  of carbon dioxide
-  \item[WAIS] the West Antarctic Ice Sheet, which is calving into the sea
-  as a result of climate change
-}
+  \describe{
+    \item{PB}{polar bears, which face extinction through loss of ice
+    floe hunting grounds}
+    \item{NB}{The Norfolk Broads, which flood due to intense rainfall
+    events}
+    \item{LF}{London flooding, as a result of sea level rise}
+    \item{THC}{The Thermo-haline circulation, which may slow or stop as
+      a result of anthropogenic modification of the hydrological cycle}
+    \item{OA}{Oceanic acidification as a result of anthropogenic emissions
+    of carbon dioxide}
+    \item{WAIS}{The West Antarctic Ice Sheet, which is calving into the sea
+    as a result of climate change}
+  }
 }
 \source{
   Data kindly supplied by Saffron O'Neill of the University of East Anglia

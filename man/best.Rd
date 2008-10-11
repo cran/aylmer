@@ -37,12 +37,15 @@ best(x, func = NULL, n = 100, ...)
  a <- matrix(0,5,5)
  diag(a) <- NA
  a[cbind(1:5 , c(2:5,1))] <- 4
+\dontrun{
  best(a,control=list(maxit=10))   ## Answer should be all ones except the diagonal
-
+}
 
 # Now a non-default function; SANN should be able to get func(x) down to
 #  zero pretty quickly:
-
+\dontrun{
  best(a,func=function(x){x[1,2]},control=list(maxit=100))
+}
+# The 'dontrun' is needed because sometimes the method needs a bigger n
 
 }
