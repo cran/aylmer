@@ -1,3 +1,6 @@
 exportPattern("^[^\\.]")
 useDynLib(aylmer)
 import(methods)
+import("Brobdingnag")
+
+

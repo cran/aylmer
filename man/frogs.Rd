@@ -25,7 +25,7 @@
   \code{as.pairwise()}.  Note that the square matrix may have \code{NA}
   entries off the main diagonal (some pairs did not meet).
 
-  See \code{purum.Rd} for another type of mating preference dataset.
+  See \code{purum.Rd} for another mating preference dataset.
   
 }
 \seealso{\code{\link{purum}}}

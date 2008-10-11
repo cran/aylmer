@@ -18,7 +18,7 @@ License: \tab GPL-2
 \author{
 Robin K. S. Hankin (\R) and Luke G. West (C++)
 
-Maintainer: <r.hankin@noc.soton.ac.uk>
+Maintainer: <hankin.robin@gmai.com>
 }
 \references{
   \itemize{
