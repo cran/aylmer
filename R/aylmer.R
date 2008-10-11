@@ -329,7 +329,7 @@ setValidity("board",
   m <- marginals(x)
   cx <- .Cargs(x)
   x[is.na(x)] <- 0
-  flash <- c(name="randpath", cx, list(ans=as.integer(as.vector(x))), n=as.integer(n), PACKAGE="aylmer")
+  flash <- c("randpath", cx, list(ans=as.integer(as.vector(x))), n=as.integer(n), PACKAGE="aylmer")
   jj <- do.call(".C",flash)
   n <- jj$n
   if(give){

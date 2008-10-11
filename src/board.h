@@ -1,4 +1,4 @@
-#include<iostream>
+//#include<iostream>
 #include<vector>
 #include<deque>
 #include<map>
@@ -236,6 +236,7 @@ namespace aylmer {
    n=again?0:n-num;
   }
 
+/*
   void print(std::ostream& s) const {
    s << "value...\n";
    for(int i=0;i<dim[0];i++) {
@@ -254,8 +255,9 @@ namespace aylmer {
    s << "bins    :"; for(int i=0;i<bins   .size();i++) cout << bins[i].first << "," << bins[i].second << " "; s << "\n";
    s << "path    :"; for(int i=0;i<path[0].size();i++) cout << path[0][i]    << "," << path[1][i]     << " "; s << "\n";
    s << "index   :" << get_index() << "\n";
-  }
- }; // Board
+  } */
+}; // Board
+
 
 
  class Boards {
@@ -273,12 +275,13 @@ namespace aylmer {
   void insert(const Board& b) {Boards_i i(boards.find(b)); if (i!=boards.end()) (i->second)++; else boards.insert(Boards_v(b,1));}
 
  public:
-  void print(std::ostream& s) const {
+/*  void print(std::ostream& s) const {
    for(Boards_ci i=boards.begin();i!=boards.end();i++) {
     s << i->second << " : "; i->first.print(s); s << "\n";
    }
   }
-
+*/
+ 
   size_t size() const {return boards.size();}
 
   Boards_i begin() {return boards.begin();}

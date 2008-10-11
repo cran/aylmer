@@ -3,7 +3,7 @@
   if(n>0){
     n <- n+1
   }
-  jj <- c(name="numboards", .Cargs(x), ans=as.integer(n), PACKAGE="aylmer")
+  jj <- c("numboards", .Cargs(x), ans=as.integer(n), PACKAGE="aylmer")
   out <- do.call(".C",jj)$ans
   if(out == n){
     warning("Full number of boards exceeds n")
@@ -19,7 +19,7 @@ return(out)
   n <-  no.of.boards(x,n=n)
 
   flash <- 
-    c(name="allboards",
+    c("allboards",
       .Cargs(x),
       list(out=integer(length(x) * n)),
       as.integer(n),
@@ -39,7 +39,7 @@ return(out)
   n <- no.of.boards(x, n=n)
   if(use.C){
     flash <-
-      c(name="allboardprobs",
+      c("allboardprobs",
         .Cargs(x),
         list(ans=double(n)),
         list(as.integer(n)), 

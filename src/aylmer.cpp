@@ -1,6 +1,6 @@
 #include"aylmer.h"
 
-#include<iostream>
+//#include<iostream>
 #include<vector>
 
 
@@ -93,7 +93,7 @@ int main() {
   int num=10;
 //  for(int i=0;i<NR*NC;i++) ans[i]=1;
   randpath(row,&nr,col,&nc,(int*)blank,&nb,ans,&num);
-  std::cout << n << ":" << num << "\n";
+  ///  std::cout << n << ":" << num << "\n";
  }
 
 /*
