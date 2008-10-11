@@ -5,9 +5,11 @@
 \alias{no.of.boards}
 \alias{is.1dof}
 \alias{maxlike}
+\alias{board-class}
 \title{Various board functionality}
 \description{
-  A \dfn{board} is a matrix with non-negative integer elements.  It
+  A \dfn{board} is a matrix with non-negative integer elements; an
+  object of class \code{board}.  It
   represents a contingency table; \code{NA} entries specify structural
   zeros.  Function \code{allboards()} takes a matrix \code{x}, coerces
   it to a board, then enumerates all boards with identical marginal
