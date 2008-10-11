@@ -29,7 +29,10 @@
   test is useful for assessing cases where the null hypothesis of
   conditional multinomial distribution is suspected to be false.  The
   test is implemented in the form of a new \proglang{R} package,
-  \pkg{aylmer}.}
+  \pkg{aylmer}.
+
+  This vignette is based on~\citet{west2008}.
+}
 
 \Keywords{Fisher's exact test, computational combinatorics,
   \proglang{R}, multinomial distribution, rock-paper-scissors,
@@ -199,50 +202,7 @@ the enumeration operates over permissible boards.
 \includegraphics[width=14cm]{metropolis}
 \caption{A pictorial description of the algorithm used in
   function\label{path} \code{randomboards()} to generate a random
-  table with given marginal totals.  This graphic shows how a table is
-  used to generate, randomly, another table by adding a perturbation
-  called a `df1 loop' by~\citet{aoki2005}.  The table so generated is
-  called a ``candidate'' and is either accepted or rejected according
-  to the standard Metropolis-Hastings
-  algorithm~\citep{metropolis1953}: the frequencies of tables in the
-  resulting Markov chain are (asymptotically) proportional to their
-  probabilities given by Equation~\ref{prob.of.B}. \newline Two
-  examples, one per row, are shown; structural zeros are shown in
-  gray.  The algorithm generates a random closed path of alternating
-  horizontal and vertical lines, shown in light blue.  A table
-  generates a candidate table by alternately incrementing and
-  decrementing squares on the corners of the path, thereby preserving
-  the marginal totals.
-  \newline A non-gray square (``{\sc start}'') is chosen at random;
-  this is marked with a black circle.  The path starts by choosing a
-  random non-gray square in the same row as the start; from this
-  square the path continues vertically to another non-gray square.  If
-  the loop may be closed (that is, if the square on the same column as
-  {\sc start} and the same row as the free end is non-gray) then the
-  path is closed and the algorithm terminates.  If the path may not be
-  closed (because the relevant square is gray), then the path is
-  extended in a similar fashion; excepting that columns and rows with
-  only a single remaining unshaded square are disallowed.  The
-  resulting path then has the property that any row of the board has
-  an even number of path corners: and no path corner lies on a gray
-  square.  Thus taking a permissible board and alternately
-  incrementing and decrementing squares along such a path will result
-  in a permissible board: structural zeros (gray squares) remain
-  zeros; and the marginal totals remain unaltered.  Modifying a board
-  in this manner yields the candidate sample for the
-  Metropolis-Hastings algorithm.\newline In the first row, the path
-  proceeds from the {\sc start} to the square immediately to the left;
-  thence to the square immediately above.  The path may be closed
-  because the square immediately above {\sc start} is non-gray.  It
-  is clear that if the board has no non-gray squares, a path of this
-  type (viz: a simple square) is always chosen and the method reduces
-  to that of \cite{raymond1995}.  \newline The second line shows
-  a more involved example in which the path needs a second leg to be
-  closed; note how the path crosses itself (not forbidden).  Observe
-  that the algorithm applied to boards with an ordered sample
-  space---such as Table~\ref{chess}
-  or~\ref{ordered_sample_space}---would result in every non-gray
-  square being either incremented or decremented}
+  table with given marginal totals}
   \end{center}
 \end{figure}
 
@@ -290,8 +250,12 @@ boards is then tested just as in Fisher's test: the p-value is the sum
 of the probabilities of all permissible boards with a probability less
 than or equal to that of the observed board.
 
-\subsection{The number of distinct contingency tables with given
+\subsection{Enumerating the  distinct contingency tables with given
   marginal totals}
+
+Because of the enumerative techniques used in this paper, it is
+important to have at least a rough idea of the number of boards that
+one must enumerate.
 
 There are a number of ways of
 assessing~$M=M\left(s_1,\ldots,s_r,t_1,\ldots,t_c\right)$, the number
@@ -330,6 +294,53 @@ in Figure~\ref{path}.  Random permissible boards are generated and the
 p-value reported is as above except that instead of a complete
 enumeration, an ensemble of randomly generated boards is used.
 
+Figure~\ref{path} shows how a table is used to generate, randomly,
+another table by adding a perturbation called a `df1 loop'
+by~\citet{aoki2005}.  The table so generated is called a ``candidate''
+and is either accepted or rejected according to the standard
+Metropolis-Hastings algorithm~\citep{metropolis1953}: the frequencies
+of tables in the resulting Markov chain are (asymptotically)
+proportional to their probabilities given by
+Equation~\ref{prob.of.B}. 
+
+Two examples, one per row, are shown; structural zeros are shown in
+gray.  The algorithm generates a random closed path of alternating
+horizontal and vertical lines, shown in light blue.  A table generates
+a candidate table by alternately incrementing and decrementing squares
+on the corners of the path, thereby preserving the marginal totals.
+
+A non-gray square (``{\sc start}'') is chosen at random; this is
+marked with a black circle.  The path starts by choosing a random
+non-gray square in the same row as the start; from this square the
+path continues vertically to another non-gray square.  If the loop may
+be closed (that is, if the square on the same column as {\sc start}
+and the same row as the free end is non-gray) then the path is closed
+and the algorithm terminates.  If the path may not be closed (because
+the relevant square is gray), then the path is extended in a similar
+fashion; excepting that columns and rows with only a single remaining
+unshaded square are disallowed.  The resulting path then has the
+property that any row of the board has an even number of path corners:
+and no path corner lies on a gray square.  Thus taking a permissible
+board and alternately incrementing and decrementing squares along such
+a path will result in a permissible board: structural zeros (gray
+squares) remain zeros; and the marginal totals remain unaltered.
+Modifying a board in this manner yields the candidate sample for the
+Metropolis-Hastings algorithm.
+
+In the first row, the path proceeds from the {\sc start} to the square
+immediately to the left; thence to the square immediately above.  The
+path may be closed because the square immediately above {\sc start} is
+non-gray.  It is clear that if the board has no gray squares, a path
+of this type (viz: a simple square) is always chosen and the method
+reduces to that of \cite{raymond1995}.
+
+The second row of Figure~\ref{path} shows a more involved example in
+which the path needs a second leg to be closed; note how the path
+crosses itself (not forbidden).  Observe that the algorithm applied to
+boards with an ordered sample space---such as Table~\ref{chess}
+or~\ref{ordered_sample_space}---would result in every non-gray square
+being either incremented or decremented.
+  
 \section[Package aylmer in use]{Package \pkg{aylmer} in use}
 
 This section illustrates the functionality of the package with
@@ -386,11 +397,10 @@ jj1
 Thus there is sufficient evidence to reject this null at the~$5\%$
 level.
 
-Dataset \code{glass} in the \pkg{aylmer} package includes an
-illustration of this technique applied to ordered categorical factors
-(type ``\code{?glass}'' at the \proglang{R} prompt).
+The same technique may be applied to ordered categorical factors; the
+\pkg{aylmer} package includes an illustration of this (type
+\code{?glass} at the \proglang{R} prompt).
 
-\subsubsection{Incomplete cases}
 One might consider instead the effect of changing personnel.  Suppose
 now that there are three machines A, B, C and three supervisors S1,
 S2, S3.  It is suspected that the supervisors use slightly differing
@@ -804,7 +814,7 @@ of~\citeauthor{kendall1940} (it is clear that our test fails to reject
 {\em any} board whose elements are all zero or one) but further work
 would be required to explore any relationship.  
 
-\subsubsection{One-tailed and two-tailed tests in pairwise comparison}
+\subsection{One-tailed and two-tailed tests in pairwise comparison}
 
 The general problem of comparing~$n$ players~$p_1,\ldots,p_n$
 potentially has~$n(n-1)/2$ pairwise comparisons.  The system of
@@ -1042,8 +1052,7 @@ We acknowledge the many stimulating and helpful comments made by the
 ever-more demanding test cases which repeatedly uncovered bugs in
 earlier versions of our software.
 
-Function \code{aylmer.function()} is the result of a suggestion by an
-anonymous JSS referee.
-
+Passing a function to \code{aylmer.test()} in order to specify an
+alternative hypothesis was suggested by an anonymous JSS referee.
 \bibliography{fishergen}
 \end{document}
